@@ -2,11 +2,11 @@
 // for the specified # of milliseconds when used w/ `await`
 // e.g. inside an async function:
 // await sleep(2000)  => pauses the function for 2 seconds before moving on
-function sleep(ms) {
+function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(() => resolve(), ms))
 }
 
-export async function getVans(id) {
+export async function getVans(id: string) {
   const url = id ? `/api/vans/${id}` : "/api/vans"
   const res = await fetch(url)
   if (!res.ok) {
@@ -20,7 +20,7 @@ export async function getVans(id) {
   return data.vans
 }
 
-export async function getHostVans(id) {
+export async function getHostVans(id?: string) {
   const url = id ? `/api/host/vans/${id}` : "/api/host/vans"
   const res = await fetch(url)
   if (!res.ok) {

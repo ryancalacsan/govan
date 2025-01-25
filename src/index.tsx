@@ -5,6 +5,7 @@ import Layout from "./Layout"
 import Home from "./Home"
 import About from "./About"
 import Vans from "./Vans"
+import VanDetail from "./VanDetail"
 
 import "./index.css"
 import "./mirage/server"
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="vans" element={<Vans />} />
+          <Route path="vans/:id" element={<VanDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

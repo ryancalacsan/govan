@@ -2,9 +2,19 @@ import React from "react"
 import { Link, useSearchParams } from "react-router"
 import { getVans } from "./api"
 
+interface Van {
+  id: string
+  name: string
+  price: number
+  description: string
+  imageUrl: string
+  type: string
+  hostId: string
+}
+
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [vans, setVans] = React.useState([])
+  const [vans, setVans] = React.useState<Van[]>([])
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(null)
 
@@ -32,24 +42,32 @@ export default function Vans() {
 
   const vanElements = displayedVans.map((van) => (
     <div className="card bg-base-100 w-96 shadow-sm grow">
-      <figure>
-        <img
-          src={van.imageUrl}
-          alt={van.name}
-          className="h-90 w-90 object-cover"
-        />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">
-          {van.name}
-          <div className="badge badge-secondary">NEW</div>
-        </h2>
-        <p>{van.description}</p>
-        <div className="card-actions justify-end">
-          <div className="badge badge-outline">{van.type}</div>
-          <div className="badge badge-outline">${van.price} / day</div>
+      <Link
+        to={van.id}
+        state={{
+          search: `?${searchParams.toString()}`,
+          type: typeFilter,
+        }}
+      >
+        <figure>
+          <img
+            src={van.imageUrl}
+            alt={van.name}
+            className="h-90 w-90 object-cover"
+          />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">
+            {van.name}
+            <div className="badge badge-secondary">NEW</div>
+          </h2>
+          <p>{van.description}</p>
+          <div className="card-actions justify-end">
+            <div className="badge badge-outline">{van.type}</div>
+            <div className="badge badge-outline">${van.price} / day</div>
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   ))
   // <div key={van.id} className="van-tile">
@@ -72,7 +90,7 @@ export default function Vans() {
   //   </Link>
   // </div>
 
-  function handleFilterChange(key, value) {
+  function handleFilterChange(key: string, value: any) {
     setSearchParams((prevParams) => {
       if (value === null) {
         prevParams.delete(key)
@@ -84,7 +102,12 @@ export default function Vans() {
   }
 
   if (loading) {
-    return <h1>Loading...</h1>
+    return (
+      <div className="flex flex-col items-center justify-center mx-auto">
+        <p>Loading Vans</p>
+        <span className="loading loading-dots loading-xl"></span>
+      </div>
+    )
   }
 
   if (error) {
