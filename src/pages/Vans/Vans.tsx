@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link, useSearchParams } from "react-router"
-import { getVans } from "./api"
+import { getVans } from "../../mirage/api"
 
 interface Van {
   id: string
@@ -17,6 +17,7 @@ export default function Vans() {
   const [vans, setVans] = React.useState<Van[]>([])
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(null)
+  const [maxPrice, setMaxPrice] = React.useState<number>(120)
 
   const typeFilter = searchParams.get("type")
 
@@ -36,12 +37,14 @@ export default function Vans() {
     loadVans()
   }, [])
 
-  const displayedVans = typeFilter
-    ? vans.filter((van) => van.type === typeFilter)
-    : vans
+  const displayedVans = vans.filter((van) => {
+    const matchesType = typeFilter ? van.type === typeFilter : true
+    const matchesPrice = maxPrice ? van.price <= maxPrice : true
+    return matchesType && matchesPrice
+  })
 
   const vanElements = displayedVans.map((van) => (
-    <div className="card bg-base-100 w-96 shadow-sm grow">
+    <div key={van.id} className="card bg-base-100 w-96 shadow-sm grow">
       <Link
         to={van.id}
         state={{
@@ -70,25 +73,6 @@ export default function Vans() {
       </Link>
     </div>
   ))
-  // <div key={van.id} className="van-tile">
-  //   <Link
-  //     to={van.id}
-  //     state={{
-  //       search: `?${searchParams.toString()}`,
-  //       type: typeFilter,
-  //     }}
-  //   >
-  //     <img src={van.imageUrl} />
-  //     <div className="van-info">
-  //       <h3>{van.name}</h3>
-  //       <p>
-  //         ${van.price}
-  //         <span>/day</span>
-  //       </p>
-  //     </div>
-  //     <i className={`van-type ${van.type} selected`}>{van.type}</i>
-  //   </Link>
-  // </div>
 
   function handleFilterChange(key: string, value: any) {
     setSearchParams((prevParams) => {
@@ -100,6 +84,13 @@ export default function Vans() {
       return prevParams
     })
   }
+
+  function handlePriceChange(e) {
+    setMaxPrice(e.target.value)
+  }
+  useEffect(() => {
+    handleFilterChange("maxPrice", maxPrice)
+  }, [maxPrice])
 
   if (loading) {
     return (
@@ -117,37 +108,58 @@ export default function Vans() {
   return (
     <div className="van-list-container flex flex-col">
       <h1>Explore our van options</h1>
-      <div className="van-list-filter-buttons">
-        <button
+      <form className="filter">
+        <input
           onClick={() => handleFilterChange("type", "simple")}
-          className={`van-type simple 
-                        ${typeFilter === "simple" ? "selected" : ""}`}
-        >
-          Simple
-        </button>
-        <button
+          className="btn"
+          type="radio"
+          name="van-type"
+          aria-label="Simple"
+        />
+        <input
           onClick={() => handleFilterChange("type", "luxury")}
-          className={`van-type luxury 
-                        ${typeFilter === "luxury" ? "selected" : ""}`}
-        >
-          Luxury
-        </button>
-        <button
+          className="btn"
+          type="radio"
+          name="van-type"
+          aria-label="Luxury"
+        />
+        <input
           onClick={() => handleFilterChange("type", "rugged")}
-          className={`van-type rugged 
-                        ${typeFilter === "rugged" ? "selected" : ""}`}
-        >
-          Rugged
-        </button>
+          className="btn"
+          type="radio"
+          name="van-type"
+          aria-label="Rugged"
+        />
+        <input
+          onClick={() => handleFilterChange("type", null)}
+          className="btn btn-square"
+          type="reset"
+          value="×"
+        />
+      </form>
 
-        {typeFilter ? (
-          <button
-            onClick={() => handleFilterChange("type", null)}
-            className="van-type clear-filters"
-          >
-            Clear filter
-          </button>
-        ) : null}
+      <div className="w-full max-w-xs">
+        <input
+          onChange={handlePriceChange}
+          type="range"
+          min="60"
+          max="120"
+          step={20}
+          className="range"
+          value={maxPrice}
+        />
+        <div className="flex justify-between px-2.5 mt-2 text-xs">
+          <span>|</span>
+          <span>|</span>
+          <span>|</span>
+          <span>|</span>
+        </div>
+        <div className="flex justify-between px-2.5 mt-2 text-xs">
+          <span>60</span>
+          <span>80</span>
+          <span>100</span>
+          <span>120</span>
+        </div>
       </div>
       <div className="van-list flex flex-wrap gap-8 mt-10 justify-items-center">
         {vanElements}

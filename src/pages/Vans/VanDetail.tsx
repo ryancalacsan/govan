@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, useParams, useLocation } from "react-router"
-import { getVans } from "./api"
+import { getVans } from "../../mirage/api"
 
 interface Van {
   id: string
@@ -25,8 +25,12 @@ export default function VanDetail() {
       try {
         const data = await getVans(id)
         setVan(data)
-      } catch (err) {
-        setError(err)
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message)
+        } else {
+          setError("An unknown error occurred.")
+        }
       } finally {
         setLoading(false)
       }
@@ -57,15 +61,21 @@ export default function VanDetail() {
       </Link>
 
       {van && (
-        <div className="van-detail">
-          <img src={van.imageUrl} />
-          <i className={`van-type ${van.type} selected`}>{van.type}</i>
-          <h2>{van.name}</h2>
-          <p className="van-price">
-            <span>${van.price}</span>/day
-          </p>
-          <p>{van.description}</p>
-          <button className="link-button">Rent this van</button>
+        <div className="van-detail flex flex-col">
+          <img
+            src={van.imageUrl}
+            className="h-96 object-cover object-[50%_75%]"
+          />
+          <div>
+            <i className={`van-type ${van.type} selected`}>{van.type}</i>
+            <h2>{van.name}</h2>
+            <div className="card-actions justify-end">
+              <div className="badge badge-outline">{van.type}</div>
+              <div className="badge badge-outline">${van.price} / day</div>
+            </div>
+            <p>{van.description}</p>
+            <button className="link-button">Rent this van</button>
+          </div>
         </div>
       )}
     </div>
