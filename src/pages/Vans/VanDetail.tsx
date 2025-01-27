@@ -1,16 +1,7 @@
 import React from "react"
 import { Link, useParams, useLocation } from "react-router"
 import { getVans } from "../../mirage/api"
-
-interface Van {
-  id: string
-  name: string
-  price: number
-  description: string
-  imageUrl: string
-  type: string
-  hostId: string
-}
+import { Van } from "../../types"
 
 export default function VanDetail() {
   const [van, setVan] = React.useState<Van | null>(null)

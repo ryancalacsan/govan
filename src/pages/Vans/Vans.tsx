@@ -1,16 +1,7 @@
 import React, { useEffect } from "react"
 import { Link, useSearchParams } from "react-router"
 import { getVans } from "../../mirage/api"
-
-interface Van {
-  id: string
-  name: string
-  price: number
-  description: string
-  imageUrl: string
-  type: string
-  hostId: string
-}
+import { Van } from "../../types"
 
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams()

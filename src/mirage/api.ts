@@ -3,15 +3,7 @@
 // e.g. inside an async function:
 // await sleep(2000)  => pauses the function for 2 seconds before moving on
 
-interface Van {
-  id: string
-  name: string
-  price: number
-  description: string
-  imageUrl: string
-  type: string
-  hostId: string
-}
+import { Van } from "../types"
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(() => resolve(), ms))
