@@ -1,13 +1,12 @@
+import { Van } from "../types"
 // A function whose only purpose is to delay execution
 // for the specified # of milliseconds when used w/ `await`
 // e.g. inside an async function:
 // await sleep(2000)  => pauses the function for 2 seconds before moving on
 
-import { Van } from "../types"
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(() => resolve(), ms))
-}
+// function sleep(ms: number) {
+//   return new Promise((resolve) => setTimeout(() => resolve(), ms))
+// }
 
 export async function getVans(id: string): Promise<Van[]> {
   const url = id ? `/api/vans/${id}` : "/api/vans"
