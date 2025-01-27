@@ -53,3 +53,16 @@ export async function loginUser(creds) {
 
   return data
 }
+
+export async function getHostIncome() {
+  const res = await fetch("/api/host/income")
+  if (!res.ok) {
+    throw {
+      message: "Failed to fetch income",
+      statusText: res.statusText,
+      status: res.status,
+    }
+  }
+  const data = await res.json()
+  return data.users.income
+}

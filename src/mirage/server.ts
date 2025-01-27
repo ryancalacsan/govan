@@ -79,6 +79,7 @@ createServer({
       email: "b@b.com",
       password: "p123",
       name: "Bob",
+      income: [1500, 1000, 1250, 2000, 2260],
     })
   },
 
@@ -106,6 +107,11 @@ createServer({
       // Hard-code the hostId for now
       const id = request.params.id
       return schema.vans.findBy({ id, hostId: "123" })
+    })
+
+    this.get("/host/income", (schema, request) => {
+      // Hard-code the hostId for now
+      return schema.users.findBy({ id: "123" })
     })
 
     this.post("/login", (schema, request) => {
