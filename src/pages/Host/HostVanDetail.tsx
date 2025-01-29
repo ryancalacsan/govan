@@ -31,7 +31,11 @@ export default function HostVanDetail() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div
+        role="status"
+        aria-live="polite"
+        className="flex justify-center items-center h-screen"
+      >
         <span className="text-2xl text-gray-600">Loading...</span>
       </div>
     )
@@ -39,8 +43,12 @@ export default function HostVanDetail() {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <span className="text-2xl text-red-500">
+      <div
+        role="alert"
+        aria-live="assertive"
+        className="flex justify-center items-center h-screen"
+      >
+        <span className="text-2xl text-warning">
           There was an error: {error.message}
         </span>
       </div>
@@ -89,6 +97,7 @@ export default function HostVanDetail() {
                       ? "text-base-content font-semibold border-b-2 border-base-content"
                       : "text-gray-600 hover:text-base-content"
                   }
+                  aria-label="View details of the van"
                 >
                   Details
                 </NavLink>

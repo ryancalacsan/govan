@@ -26,7 +26,7 @@ export default function Dashboard() {
         <figure>
           <img
             src={van.imageUrl}
-            alt="van"
+            alt={`Image of ${van.name}`}
             className="object-cover h-24 w-24 rounded-lg"
           />
         </figure>
@@ -51,51 +51,72 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center mx-auto">
-        <p>Loading Your Vans</p>
-        <span className="loading loading-dots loading-xl"></span>
+      <div
+        role="status"
+        aria-live="polite"
+        className="flex flex-col items-center justify-center mx-auto"
+      >
+        <p>Loading Your Vans...</p>
+        <span
+          className="loading loading-dots loading-xl"
+          aria-hidden="true"
+        ></span>
       </div>
     )
   }
 
   if (error) {
-    return <h1>Error: {error.message}</h1>
+    return (
+      <div role="alert" className="text-warning p-4">
+        <h1>An error occurred: {error.message}</h1>
+        <p>Try refreshing the page or contact support if the issue persists.</p>
+      </div>
+    )
   }
 
   return (
     <>
       <Alert>Welcome!</Alert>
+      <h1 className="text-center text-accent text-xl font-bold mt-2">
+        Your Dashbaord
+      </h1>
       <section className="mx-auto flex justify-center w-full max-w-3xl">
         <div className="stats stats-vertical sm:stats-horizontal grow w-full max-sm:max-w-md ">
           <Link to="income">
-            <div className="stat">
+            <figure className="stat">
               <div className="stat-figure text-secondary">
                 <CiDollar size="2em" />
               </div>
-              <div className="stat-title">Income</div>
-              <div className="stat-value">$2,260</div>
-              <div className="stat-desc">last 30 Days</div>
-            </div>
+              <figcaption>
+                <div className="stat-title">Income</div>
+                <div className="stat-value">$2,260</div>
+                <div className="stat-desc">last 30 Days</div>
+              </figcaption>
+            </figure>
           </Link>
           <Link to="reviews">
-            <div className="stat">
+            <figure className="stat">
               <div className="stat-figure text-secondary">
                 <CiStar size="2em" />
               </div>
-              <div className="stat-title">Review Score</div>
-              <div className="stat-value">5.0</div>
-              <div className="stat-desc">out of 5.0</div>
-            </div>
+              <figcaption>
+                <div className="stat-title">Review Score</div>
+                <div className="stat-value">5.0</div>
+                <div className="stat-desc">out of 5.0</div>
+              </figcaption>
+            </figure>
           </Link>
 
-          <div className="stat">
+          <figure className="stat">
             <div className="stat-figure text-secondary">
               <CiCalendar size="2em" />
             </div>
-            <div className="stat-title">Avg Rental Time</div>
-            <div className="stat-value">3 Days</div>
-            <div className="stat-desc">↘︎ 1 (25%)</div>
-          </div>
+            <figcaption>
+              <div className="stat-title">Avg Rental Time</div>
+              <div className="stat-value">3 Days</div>
+              <div className="stat-desc">↘︎ 1 (25%)</div>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -109,7 +130,7 @@ export default function Dashboard() {
           <>{renderVanElements(vans)}</>
         )}
         <Link to="vans" className=" text-accent hover:underline">
-          View all
+          View all listed vans
         </Link>
       </section>
     </>
