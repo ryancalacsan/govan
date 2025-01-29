@@ -29,7 +29,11 @@ const color = {
   "base-100": "#605dff",
 }
 
-export const LineChart = ({ userData }) => {
+interface LineChartProps {
+  userData: number[]
+}
+
+export const LineChart = ({ userData }: LineChartProps) => {
   const options = {}
   const data = {
     labels: ["Jan", "Feb", "March", "April", "May", "June"],

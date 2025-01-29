@@ -9,6 +9,13 @@ export interface Van {
   hostId: string
 }
 
+export interface User {
+  id: string
+  email: string
+  password: string
+  name: string
+  income: number[]
+}
 export interface LoginFormData {
   email: string
   password: string

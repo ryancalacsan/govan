@@ -6,7 +6,7 @@ import { Van } from "../../types"
 export default function HostVans() {
   const [vans, setVans] = React.useState([])
   const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState(null)
+  const [error, setError] = React.useState<Error | null>(null)
 
   React.useEffect(() => {
     async function loadVans() {
@@ -14,8 +14,12 @@ export default function HostVans() {
       try {
         const data = await getHostVans()
         setVans(data)
-      } catch (err) {
-        setError(err)
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err)
+        } else {
+          setError(new Error("An unknown error occurred."))
+        }
       } finally {
         setLoading(false)
       }

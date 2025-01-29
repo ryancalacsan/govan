@@ -1,8 +1,5 @@
 import { Van, LoginFormData } from "../types"
-// A function whose only purpose is to delay execution
-// for the specified # of milliseconds when used w/ `await`
-// e.g. inside an async function:
-// await sleep(2000)  => pauses the function for 2 seconds before moving on
+// A function whose only purpose is to delay execution for testing
 
 // function sleep(ms: number) {
 //   return new Promise((resolve) => setTimeout(() => resolve(), ms))

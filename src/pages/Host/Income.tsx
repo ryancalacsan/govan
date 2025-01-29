@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 export default function Income() {
   const [hostIncome, setHostIncome] = useState<number[] | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
     async function loadIncome() {
@@ -13,8 +13,12 @@ export default function Income() {
       try {
         const data = await getHostIncome()
         setHostIncome(data)
-      } catch (err) {
-        setError(err)
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err)
+        } else {
+          setError(new Error("An unknown error occurred"))
+        }
       } finally {
         setLoading(false)
       }
@@ -37,7 +41,11 @@ export default function Income() {
   return (
     <div className="p-4">
       <h1>Income</h1>
-      <LineChart userData={hostIncome} />
+      {hostIncome ? (
+        <LineChart userData={hostIncome} />
+      ) : (
+        <p>No income data available</p>
+      )}
     </div>
   )
 }

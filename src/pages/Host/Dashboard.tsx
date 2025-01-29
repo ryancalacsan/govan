@@ -8,7 +8,7 @@ import Alert from "../../components/Alert"
 export default function Dashboard() {
   const [vans, setVans] = React.useState([])
   const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState(null)
+  const [error, setError] = React.useState<Error | null>(null)
   React.useEffect(() => {
     setLoading(true)
     getHostVans()

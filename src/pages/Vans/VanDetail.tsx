@@ -6,7 +6,7 @@ import { Van } from "../../types"
 export default function VanDetail() {
   const [van, setVan] = React.useState<Van | null>(null)
   const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState<string | null>(null)
+  const [error, setError] = React.useState<Error | null>(null)
   const { id } = useParams<{ id: string }>()
   const location = useLocation()
 
@@ -18,9 +18,9 @@ export default function VanDetail() {
         setVan(data[0] || null)
       } catch (err: unknown) {
         if (err instanceof Error) {
-          setError(err.message)
+          setError(err)
         } else {
-          setError("An unknown error occurred.")
+          setError(new Error("An unknown error occurred."))
         }
       } finally {
         setLoading(false)
@@ -39,7 +39,11 @@ export default function VanDetail() {
   }
 
   if (error) {
-    return <h1 className="text-red-500 text-xl">There was an error: {error}</h1>
+    return (
+      <h1 className="text-red-500 text-xl">
+        There was an error: {error.message}
+      </h1>
+    )
   }
 
   const search = location.state?.search || ""

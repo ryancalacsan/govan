@@ -9,24 +9,24 @@ export default function Login() {
     email: "",
     password: "",
   })
-  const [status, setStatus] = React.useState("idle")
-  const [error, setError] = React.useState(null)
+  const [status, setStatus] = React.useState<"idle" | "submitting">("idle")
+  const [error, setError] = React.useState<Error | null>(null)
 
   const location = useLocation()
   const navigate = useNavigate()
 
   const from = location.state?.from || "/host"
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus("submitting")
     loginUser(loginFormData)
-      .then((data) => {
+      .then(() => {
         setError(null)
-        localStorage.setItem("loggedin", true)
+        localStorage.setItem("loggedin", "true")
         navigate(from, { replace: true })
       })
-      .catch((err) => {
+      .catch((err: Error) => {
         setError(err)
       })
       .finally(() => {
@@ -34,7 +34,7 @@ export default function Login() {
       })
   }
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target
     setLoginFormData((prev) => ({
       ...prev,

@@ -1,7 +1,8 @@
 import { useOutletContext } from "react-router"
+import { Van } from "../../types"
 
 export default function HostVanPhotos() {
-  const { currentVan } = useOutletContext()
+  const { currentVan } = useOutletContext<{ currentVan: Van }>()
 
   return (
     <div className="flex justify-center items-center">

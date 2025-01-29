@@ -6,7 +6,7 @@ import { Van } from "../../types"
 export default function HostVanDetail() {
   const [currentVan, setCurrentVan] = React.useState<Van | null>(null)
   const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState<string | null>(null)
+  const [error, setError] = React.useState<Error | null>(null)
 
   const { id } = useParams()
 
@@ -18,9 +18,9 @@ export default function HostVanDetail() {
         setCurrentVan(data)
       } catch (err: unknown) {
         if (err instanceof Error) {
-          setError(err.message)
+          setError(err)
         } else {
-          setError("An unknown error occurred.")
+          setError(new Error("An unknown error occurred."))
         }
       } finally {
         setLoading(false)
@@ -41,7 +41,7 @@ export default function HostVanDetail() {
     return (
       <div className="flex justify-center items-center h-screen">
         <span className="text-2xl text-red-500">
-          There was an error: {error}
+          There was an error: {error.message}
         </span>
       </div>
     )
