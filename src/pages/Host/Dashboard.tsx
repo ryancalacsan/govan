@@ -18,7 +18,7 @@ export default function Dashboard() {
   }, [])
 
   function renderVanElements(vans: Van[]) {
-    const hostVansEls = vans.map((van) => (
+    const hostVansEls = vans.slice(0, 3).map((van) => (
       <div
         key={van.id}
         className="card card-side bg-base-200 shadow-sm max-w-xl p-4 rounded-lg m-2 mx-auto"

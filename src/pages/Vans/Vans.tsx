@@ -8,11 +8,11 @@ export default function Vans() {
   const [vans, setVans] = React.useState<Van[]>([])
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<Error | null>(null)
-  const [maxPrice, setMaxPrice] = React.useState<number>(120)
+  const [maxPrice, setMaxPrice] = React.useState<number>(200)
 
   const typeFilter = searchParams.get("type")
 
-  const PRICE_RANGES = [60, 80, 100, 120]
+  const PRICE_RANGES = [50, 100, 150, 200]
 
   React.useEffect(() => {
     async function loadVans() {
@@ -150,14 +150,13 @@ export default function Vans() {
               id="maxPriceInput"
               onChange={handlePriceChange}
               type="range"
-              min={60}
-              max={120}
-              step={20}
+              min={50}
+              max={200}
               className="range"
               value={maxPrice}
               aria-valuenow={maxPrice}
-              aria-valuemin={60}
-              aria-valuemax={120}
+              aria-valuemin={50}
+              aria-valuemax={200}
               aria-label="Select maximum price range"
             />
             <div className="flex justify-between px-2.5 mt-2 text-xs">
