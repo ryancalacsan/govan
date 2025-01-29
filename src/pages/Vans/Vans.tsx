@@ -35,7 +35,7 @@ export default function Vans() {
   })
 
   const vanElements = displayedVans.map((van) => (
-    <div key={van.id} className="card bg-base-100 w-96 shadow-sm grow">
+    <div key={van.id} className="card bg-base-100 w-96 max-w-xl shadow-sm grow">
       <Link
         to={van.id}
         state={{
@@ -47,13 +47,13 @@ export default function Vans() {
           <img
             src={van.imageUrl}
             alt={van.name}
-            className="h-90 w-90 object-cover"
+            className="h-90 w-90 object-cover rounded-lg"
           />
         </figure>
         <div className="card-body">
           <h2 className="card-title">
             {van.name}
-            <div className="badge badge-secondary">NEW</div>
+            {van.new && <div className="badge badge-secondary">NEW</div>}
           </h2>
           <p className="line-clamp-2">{van.description}</p>
           <div className="card-actions justify-end">
@@ -97,8 +97,8 @@ export default function Vans() {
   }
 
   return (
-    <div className="van-list-container flex flex-col">
-      <h1 className="text-4xl font-bold text-primary mx-auto">
+    <div className="van-list-container flex flex-col py-8">
+      <h1 className="text-4xl font-bold text-primary mx-auto mb-4">
         Explore our van options
       </h1>
       <div className="flex flex-col items-center">
@@ -164,7 +164,7 @@ export default function Vans() {
         </div>
       </div>
       {/* Van Elements */}
-      <div className="van-list flex flex-wrap gap-8 mt-10 justify-items-center">
+      <div className="van-list flex flex-wrap gap-8 mt-10 justify-center items-center">
         {vanElements}
       </div>
     </div>

@@ -20,10 +20,10 @@ export default function Reviews() {
   ]
 
   return (
-    <section className="p-8 max-w-screen-xl mx-auto">
+    <section className=" px-8 max-w-screen-xl mx-auto">
       {/* Header */}
       <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold text-primary">Your Reviews</h2>
+        <h2 className="text-2xl font-bold text-accent">Your Reviews</h2>
         <p className="text-lg text-primary-content">
           Last{" "}
           <span className="font-semibold text-primary-content">30 days</span>

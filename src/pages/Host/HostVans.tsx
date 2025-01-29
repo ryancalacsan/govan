@@ -48,7 +48,12 @@ export default function HostVans() {
   ))
 
   if (loading) {
-    return <h1>Loading...</h1>
+    return (
+      <div className="flex flex-col items-center justify-center mx-auto">
+        <p>Loading Vans</p>
+        <span className="loading loading-dots loading-xl"></span>
+      </div>
+    )
   }
 
   if (error) {
@@ -57,8 +62,10 @@ export default function HostVans() {
 
   return (
     <section>
-      <h1 className="font-bold text-xl text-center">Your listed vans</h1>
-      <div className="host-vans-list">
+      <h1 className="font-bold text-2xl text-center text-accent">
+        Your listed vans
+      </h1>
+      <div className="host-vans-list mt-4">
         {vans.length > 0 ? (
           <section>{hostVansEls}</section>
         ) : (

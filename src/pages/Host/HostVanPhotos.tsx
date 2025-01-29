@@ -8,7 +8,7 @@ export default function HostVanPhotos() {
       <img
         src={currentVan.imageUrl}
         alt={currentVan.name}
-        className="w-full max-w-3xl h-auto object-cover rounded-lg shadow-md"
+        className="w-full max-w-3xl h-auto object-contain rounded-lg shadow-md max-h-100"
       />
     </div>
   )

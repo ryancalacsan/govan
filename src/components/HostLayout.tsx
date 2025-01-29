@@ -2,7 +2,7 @@ import { NavLink, Outlet } from "react-router"
 
 export default function HostLayout() {
   return (
-    <>
+    <div className="py-8">
       <nav className="flex justify-center">
         <ul className="menu menu-horizontal bg-base-200">
           <li>
@@ -40,7 +40,9 @@ export default function HostLayout() {
           </li>
         </ul>
       </nav>
-      <Outlet />
-    </>
+      <div className="py-4">
+        <Outlet />
+      </div>
+    </div>
   )
 }

@@ -58,7 +58,7 @@ export default function HostVanDetail() {
       <Link
         to=".."
         relative="path"
-        className="text-sm text-blue-500 hover:underline mb-4 inline-flex items-center"
+        className="text-sm text-primary hover:underline mb-4 inline-flex items-center"
       >
         &larr; <span className="ml-1">Back to all vans</span>
       </Link>
@@ -66,26 +66,20 @@ export default function HostVanDetail() {
       {currentVan && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Van Image & Info */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden col-span-1">
+          <div className="bg-base- shadow-lg rounded-lg overflow-hidden col-span-1">
             <img
               src={currentVan.imageUrl}
               alt={currentVan.name}
               className="w-full h-72 object-cover"
             />
             <div className="p-6">
-              <i
-                className={`text-sm inline-block mb-2 px-3 py-1 rounded-full ${
-                  currentVan.type === "luxury"
-                    ? "bg-green-500 text-white"
-                    : "bg-gray-500 text-white"
-                }`}
-              >
-                {currentVan.type}
-              </i>
-              <h3 className="text-3xl font-semibold text-gray-800">
+              <div className="badge badge-outline">{currentVan.type}</div>
+              <h3 className="text-3xl font-semibold text-base-content">
                 {currentVan.name}
               </h3>
-              <h4 className="text-xl text-gray-600">${currentVan.price}/day</h4>
+              <h4 className="text-xl text-base-content">
+                ${currentVan.price}/day
+              </h4>
             </div>
           </div>
 
@@ -98,8 +92,8 @@ export default function HostVanDetail() {
                   end
                   className={({ isActive }) =>
                     isActive
-                      ? "text-blue-600 font-semibold border-b-2 border-blue-600"
-                      : "text-gray-600 hover:text-blue-600"
+                      ? "text-base-content font-semibold border-b-2 border-base-content"
+                      : "text-gray-600 hover:text-base-content"
                   }
                 >
                   Details
@@ -108,8 +102,8 @@ export default function HostVanDetail() {
                   to="pricing"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-blue-600 font-semibold border-b-2 border-blue-600"
-                      : "text-gray-600 hover:text-blue-600"
+                      ? "text-base-content font-semibold border-b-2 border-base-content"
+                      : "text-gray-600 hover:text-base-content"
                   }
                 >
                   Pricing
@@ -118,8 +112,8 @@ export default function HostVanDetail() {
                   to="photos"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-blue-600 font-semibold border-b-2 border-blue-600"
-                      : "text-gray-600 hover:text-blue-600"
+                      ? "text-base-content font-semibold border-b-2 border-base-content"
+                      : "text-gray-600 hover:text-base-content"
                   }
                 >
                   Photos

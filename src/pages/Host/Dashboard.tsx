@@ -101,7 +101,7 @@ export default function Dashboard() {
 
       <section className="host-dashboard-vans p-6 mx-auto w-full flex flex-col justify-center items-center">
         <div className="top">
-          <h2 className="font-bold text-xl">Your listed vans</h2>
+          <h2 className="font-bold text-xl mb-2">Your listed vans</h2>
         </div>
         {loading && !vans ? (
           <h1>Loading...</h1>
@@ -111,7 +111,7 @@ export default function Dashboard() {
         {/*<React.Suspense fallback={<h3>Loading...</h3>}>
                     <Await resolve={loaderData.vans}>{renderVanElements}</Await>
                     </React.Suspense>*/}
-        <Link to="vans" className="btn btn-md btn-accent">
+        <Link to="vans" className=" text-accent hover:underline">
           View all
         </Link>
       </section>

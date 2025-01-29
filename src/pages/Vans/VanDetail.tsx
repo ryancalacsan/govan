@@ -50,7 +50,7 @@ export default function VanDetail() {
       <Link
         to={`..${search}`}
         relative="path"
-        className="text-blue-500 font-semibold hover:text-blue-700 flex items-center mb-8"
+        className="text-primary font-semibold hover:text-primary-content flex items-center mb-8"
       >
         &larr; <span className="ml-2">Back to {type} vans</span>
       </Link>
@@ -69,26 +69,26 @@ export default function VanDetail() {
           {/* Van Details Section */}
           <div className="flex flex-col space-y-4 w-full lg:w-1/2">
             <div className="flex items-center space-x-4">
-              <i className={`badge badge-${van.type} text-lg`}>{van.type}</i>
-              <h2 className="text-3xl font-semibold text-gray-900">
+              <h2 className="text-3xl font-semibold text-primary">
                 {van.name}
               </h2>
             </div>
 
             <div className="flex items-center justify-between mt-2">
-              <span className="text-xl font-bold text-green-600">
+              <span className="text-xl font-bold text-accent">
                 ${van.price} / day
               </span>
               <div className="flex space-x-2">
                 <span className="badge badge-outline">{van.type}</span>
-                <span className="badge badge-outline">${van.price} / day</span>
               </div>
             </div>
 
-            <p className="text-gray-700 text-lg mt-4">{van.description}</p>
+            <p className="text-base-content text-lg mt-4">{van.description}</p>
 
             {/* Rent Button */}
-            <button className="btn btn-primary mt-6">Rent this van</button>
+            <button className="btn btn-accent mt-6 text-accent-content">
+              Rent this van
+            </button>
           </div>
         </div>
       )}

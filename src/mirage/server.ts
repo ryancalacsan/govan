@@ -16,6 +16,7 @@ createServer({
       imageUrl:
         "https://images.unsplash.com/photo-1656480729328-72f36d0d243e?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       type: "simple",
+      new: true,
       hostId: "123",
     })
     server.create("van", {
@@ -27,6 +28,7 @@ createServer({
       imageUrl:
         "https://images.unsplash.com/photo-1639156814151-334b5327665b?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       type: "rugged",
+      new: true,
       hostId: "123",
     })
     server.create("van", {
@@ -38,6 +40,7 @@ createServer({
       imageUrl:
         "https://images.unsplash.com/photo-1583797227225-4233106c5a2a?q=80&w=1588&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       type: "luxury",
+      new: false,
       hostId: "456",
     })
     server.create("van", {
@@ -49,6 +52,7 @@ createServer({
       imageUrl:
         "https://images.unsplash.com/photo-1656426630273-ca84171a2010?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       type: "simple",
+      new: false,
       hostId: "789",
     })
     server.create("van", {
@@ -60,6 +64,7 @@ createServer({
       imageUrl:
         "https://images.unsplash.com/photo-1626680114529-3f6ffa002b80?q=80&w=1585&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       type: "luxury",
+      new: false,
       hostId: "789",
     })
     server.create("van", {
@@ -71,6 +76,7 @@ createServer({
       imageUrl:
         "https://images.unsplash.com/photo-1621854029362-5d66c3e0c306?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       type: "rugged",
+      new: false,
       hostId: "123",
     })
 
