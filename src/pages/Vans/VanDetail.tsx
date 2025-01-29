@@ -15,7 +15,11 @@ export default function VanDetail() {
       setLoading(true)
       try {
         const data = await getVans(id)
-        setVan(data[0] || null)
+        if (Array.isArray(data)) {
+          setVan(data[0] || null)
+        } else {
+          setVan(data)
+        }
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err)
@@ -31,7 +35,10 @@ export default function VanDetail() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center space-y-4">
+      <div
+        className="flex flex-col items-center justify-center space-y-4"
+        aria-live="polite"
+      >
         <p className="text-lg">Loading Van Detail...</p>
         <span className="loading loading-dots loading-xl"></span>
       </div>
@@ -40,8 +47,8 @@ export default function VanDetail() {
 
   if (error) {
     return (
-      <h1 className="text-red-500 text-xl">
-        There was an error: {error.message}
+      <h1 className="text-warning text-xl" aria-live="assertive">
+        Oops, that van doesnt exist. Let's look for another!
       </h1>
     )
   }
@@ -55,22 +62,21 @@ export default function VanDetail() {
         to={`..${search}`}
         relative="path"
         className="text-primary font-semibold hover:text-primary-content flex items-center mb-8"
+        aria-label={`Back to ${type} vans`}
       >
         &larr; <span className="ml-2">Back to {type} vans</span>
       </Link>
 
       {van && (
         <div className="flex flex-col lg:flex-row items-start space-y-6 lg:space-x-12 lg:space-y-0">
-          {/* Van Image Section */}
           <div className="w-full lg:w-1/2 h-96 rounded-lg overflow-hidden shadow-lg">
             <img
               src={van.imageUrl}
-              alt={van.name}
+              alt={`Image of ${van.name} van`} // More descriptive alt text
               className="object-cover w-full h-full"
             />
           </div>
 
-          {/* Van Details Section */}
           <div className="flex flex-col space-y-4 w-full lg:w-1/2">
             <div className="flex items-center space-x-4">
               <h2 className="text-3xl font-semibold text-primary">
@@ -89,8 +95,10 @@ export default function VanDetail() {
 
             <p className="text-base-content text-lg mt-4">{van.description}</p>
 
-            {/* Rent Button */}
-            <button className="btn btn-accent mt-6 text-accent-content">
+            <button
+              type="button"
+              className="btn btn-accent mt-6 text-accent-content"
+            >
               Rent this van
             </button>
           </div>

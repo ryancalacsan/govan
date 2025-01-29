@@ -5,7 +5,7 @@ import { Van, LoginFormData } from "../types"
 //   return new Promise((resolve) => setTimeout(() => resolve(), ms))
 // }
 
-export async function getVans(id?: string): Promise<Van[]> {
+export async function getVans(id?: string): Promise<Van[] | Van> {
   const url = id ? `/api/vans/${id}` : "/api/vans"
   const res = await fetch(url)
   if (!res.ok) {
