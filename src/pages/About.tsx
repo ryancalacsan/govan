@@ -1,3 +1,5 @@
+import { Link } from "react-router"
+
 export default function About() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -59,17 +61,17 @@ export default function About() {
         </h2>
         <ul className="list-inside list-disc space-y-3 text-lg text-primary-content">
           <li>
-            <strong className="text-primary">Affordable & Flexible:</strong>{" "}
+            <strong className="text-secondary">Affordable & Flexible:</strong>{" "}
             Whether you're renting or listing, we make it easy to find the
             perfect van at a price that works for you.
           </li>
           <li>
-            <strong className="text-primary">Safe & Secure:</strong> Enjoy peace
-            of mind with comprehensive insurance, secure transactions, and a
-            trusted community of renters and owners.
+            <strong className="text-secondary">Safe & Secure:</strong> Enjoy
+            peace of mind with comprehensive insurance, secure transactions, and
+            a trusted community of renters and owners.
           </li>
           <li>
-            <strong className="text-primary">
+            <strong className="text-secondary">
               Local & Community-Oriented:
             </strong>{" "}
             Support your neighbors and connect with others in your area. Our
@@ -99,12 +101,12 @@ export default function About() {
           marketplace—it’s a community of people helping each other out, one van
           at a time.
         </p>
-        <a
-          href="/signup"
-          className="btn btn-primary mt-6 px-6 py-2 text-lg font-semibold"
+        <Link
+          to="/login"
+          className="btn btn-success mt-6 px-6 py-2 text-lg font-semibold"
         >
           Get Started
-        </a>
+        </Link>
       </section>
     </div>
   )

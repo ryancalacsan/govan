@@ -82,9 +82,9 @@ createServer({
 
     server.create("user", {
       id: "123",
-      email: "b@b.com",
+      email: "guest@host.com",
       password: "p123",
-      name: "Bob",
+      name: "Guest",
       income: [1500, 1000, 1250, 2000, 2260],
     })
   },

@@ -8,3 +8,8 @@ export interface Van {
   new: boolean
   hostId: string
 }
+
+export interface LoginFormData {
+  email: string
+  password: string
+}

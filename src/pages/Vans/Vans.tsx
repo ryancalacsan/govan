@@ -101,7 +101,7 @@ export default function Vans() {
   }
 
   return (
-    <div className="van-list-container flex flex-col py-8">
+    <div className="van-list-container flex flex-col py-8 px-4 text-center">
       <h1 className="text-4xl font-bold text-primary mx-auto mb-4">
         Explore our van options
       </h1>

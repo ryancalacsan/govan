@@ -65,8 +65,8 @@ export default function Dashboard() {
   return (
     <>
       <Alert>Welcome!</Alert>
-      <section className="mx-auto flex justify-center w-full">
-        <div className="stats stats-vertical sm:stats-horizontal grow w-full max-sm:max-w-md">
+      <section className="mx-auto flex justify-center w-full max-w-3xl">
+        <div className="stats stats-vertical sm:stats-horizontal grow w-full max-sm:max-w-md ">
           <Link to="income">
             <div className="stat">
               <div className="stat-figure text-secondary">
@@ -99,7 +99,7 @@ export default function Dashboard() {
         </div>
       </section>
 
-      <section className="host-dashboard-vans p-6 mx-auto w-full flex flex-col justify-center items-center">
+      <section className="host-dashboard-vans mx-auto w-full flex flex-col justify-center items-center">
         <div className="top">
           <h2 className="font-bold text-xl mb-2">Your listed vans</h2>
         </div>
@@ -108,9 +108,6 @@ export default function Dashboard() {
         ) : (
           <>{renderVanElements(vans)}</>
         )}
-        {/*<React.Suspense fallback={<h3>Loading...</h3>}>
-                    <Await resolve={loaderData.vans}>{renderVanElements}</Await>
-                    </React.Suspense>*/}
         <Link to="vans" className=" text-accent hover:underline">
           View all
         </Link>

@@ -55,9 +55,9 @@ export default function Header() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">
+        <Link to="login" className="btn">
           <RxAvatar />
-        </a>
+        </Link>
       </div>
     </div>
   )

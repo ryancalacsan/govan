@@ -1,4 +1,4 @@
-import { Van } from "../types"
+import { Van, LoginFormData } from "../types"
 // A function whose only purpose is to delay execution
 // for the specified # of milliseconds when used w/ `await`
 // e.g. inside an async function:
@@ -36,7 +36,7 @@ export async function getHostVans(id?: string) {
   return data.vans
 }
 
-export async function loginUser(creds) {
+export async function loginUser(creds: LoginFormData) {
   const res = await fetch("/api/login", {
     method: "post",
     body: JSON.stringify(creds),
