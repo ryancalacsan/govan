@@ -7,7 +7,7 @@ export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [vans, setVans] = React.useState<Van[]>([])
   const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState(null)
+  const [error, setError] = React.useState<string | null>(null)
   const [maxPrice, setMaxPrice] = React.useState<number>(120)
 
   const typeFilter = searchParams.get("type")
@@ -16,10 +16,14 @@ export default function Vans() {
     async function loadVans() {
       setLoading(true)
       try {
-        const data = await getVans()
+        const data: Van[] = await getVans()
         setVans(data)
-      } catch (err) {
-        setError(err)
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message)
+        } else {
+          setError("An unknown error occurred.")
+        }
       } finally {
         setLoading(false)
       }
@@ -76,8 +80,8 @@ export default function Vans() {
     })
   }
 
-  function handlePriceChange(e) {
-    setMaxPrice(e.target.value)
+  function handlePriceChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setMaxPrice(Number(e.target.value))
   }
   useEffect(() => {
     handleFilterChange("maxPrice", maxPrice)
@@ -93,7 +97,7 @@ export default function Vans() {
   }
 
   if (error) {
-    return <h1>There was an error: {error.message}</h1>
+    return <h1>There was an error: {error}</h1>
   }
 
   return (

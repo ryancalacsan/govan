@@ -47,12 +47,6 @@ export default function HostVanDetail() {
     )
   }
 
-  const activeStyles = {
-    fontWeight: "bold",
-    textDecoration: "underline",
-    color: "#161616",
-  }
-
   return (
     <section className="container mx-auto px-6 py-12">
       <Link

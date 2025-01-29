@@ -7,7 +7,7 @@ export default function VanDetail() {
   const [van, setVan] = React.useState<Van | null>(null)
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
-  const { id } = useParams()
+  const { id } = useParams<{ id: string }>()
   const location = useLocation()
 
   React.useEffect(() => {
@@ -15,7 +15,7 @@ export default function VanDetail() {
       setLoading(true)
       try {
         const data = await getVans(id)
-        setVan(data)
+        setVan(data[0] || null)
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message)
