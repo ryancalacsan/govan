@@ -12,12 +12,18 @@ export default function Vans() {
 
   const typeFilter = searchParams.get("type")
 
+  const PRICE_RANGES = [60, 80, 100, 120]
+
   React.useEffect(() => {
     async function loadVans() {
       setLoading(true)
       try {
-        const data: Van[] = await getVans()
-        setVans(data)
+        const data = await getVans()
+        if (Array.isArray(data)) {
+          setVans(data)
+        } else {
+          setVans([data])
+        }
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err)
@@ -38,19 +44,16 @@ export default function Vans() {
     return matchesType && matchesPrice
   })
 
-  const vanElements = displayedVans.map((van) => (
+  const VanCard = ({ van }: { van: Van }) => (
     <div key={van.id} className="card bg-base-100 w-96 max-w-xl shadow-sm grow">
       <Link
         to={van.id}
-        state={{
-          search: `?${searchParams.toString()}`,
-          type: typeFilter,
-        }}
+        state={{ search: `?${searchParams.toString()}`, type: typeFilter }}
       >
         <figure>
           <img
             src={van.imageUrl}
-            alt={van.name}
+            alt={`Image of ${van.name} van`}
             className="h-90 w-90 object-cover rounded-lg"
           />
         </figure>
@@ -67,7 +70,7 @@ export default function Vans() {
         </div>
       </Link>
     </div>
-  ))
+  )
 
   function handleFilterChange(key: string, value: any) {
     setSearchParams((prevParams) => {
@@ -138,19 +141,24 @@ export default function Vans() {
             />
           </form>
           {/* Price Filter */}
-          <div className="w-full max-w-xs">
+          <fieldset className="w-full max-w-xs">
+            <legend className="sr-only">Price filter options</legend>
             <label htmlFor="maxPriceInput" className="">
-              Max Price
+              Max Price: ${maxPrice}
             </label>
             <input
               id="maxPriceInput"
               onChange={handlePriceChange}
               type="range"
-              min="60"
-              max="120"
+              min={60}
+              max={120}
               step={20}
               className="range"
               value={maxPrice}
+              aria-valuenow={maxPrice}
+              aria-valuemin={60}
+              aria-valuemax={120}
+              aria-label="Select maximum price range"
             />
             <div className="flex justify-between px-2.5 mt-2 text-xs">
               <span>|</span>
@@ -159,17 +167,18 @@ export default function Vans() {
               <span>|</span>
             </div>
             <div className="flex justify-between px-2.5 mt-2 text-xs">
-              <span>60</span>
-              <span>80</span>
-              <span>100</span>
-              <span>120</span>
+              {PRICE_RANGES.map((price) => (
+                <span key={price}>{price}</span>
+              ))}
             </div>
-          </div>
+          </fieldset>
         </div>
       </div>
       {/* Van Elements */}
       <div className="van-list flex flex-wrap gap-8 mt-10 justify-center items-center">
-        {vanElements}
+        {displayedVans.map((van) => (
+          <VanCard key={van.id} van={van} />
+        ))}
       </div>
     </div>
   )

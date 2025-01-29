@@ -1,8 +1,20 @@
 import { Link } from "react-router"
 
+interface SectionProps {
+  title: string
+  children: React.ReactNode
+}
+
+const Section = ({ title, children }: SectionProps) => (
+  <section className="mb-12">
+    <h2 className="text-3xl font-semibold text-primary mb-4">{title}</h2>
+    <div className="text-lg text-primary-content">{children}</div>
+  </section>
+)
+
 export default function About() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <main className="max-w-4xl mx-auto px-4 py-8">
       {/* Title Section */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-primary">About Us</h1>
@@ -15,23 +27,19 @@ export default function About() {
       </div>
 
       {/* What We Do Section */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-semibold text-primary mb-4">What We Do</h2>
-        <p className="text-lg text-primary-content">
+      <Section title="What We Do">
+        <p>
           At GoVan, we connect people who need a van with those who have one to
           share. Our platform allows you to either rent a van from a local owner
           or list your own van to earn extra income. No more long rental lines
           or paying for a van you don’t need. Instead, we bring flexibility,
           trust, and convenience to your doorstep.
         </p>
-      </section>
+      </Section>
 
       {/* For Renters Section */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-semibold text-primary mb-4">
-          For Renters
-        </h2>
-        <p className="text-lg text-primary-content">
+      <Section title="For Renters">
+        <p>
           Need a van for a move, a road trip, or a weekend project? Find the
           perfect van nearby and book it in just a few clicks. With a range of
           options from compact cargo vans to spacious family vehicles, you’ll
@@ -39,12 +47,11 @@ export default function About() {
           you’ll be renting from someone local, so you’re supporting your
           community while driving in comfort.
         </p>
-      </section>
+      </Section>
 
       {/* For Owners Section */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-semibold text-primary mb-4">For Owners</h2>
-        <p className="text-lg text-primary-content">
+      <Section title="For Owners">
+        <p>
           Got a van that’s sitting idle? Rent it out and start earning money
           with ease. Whether you need extra cash for your next adventure or
           simply want to put your vehicle to good use, our platform makes it
@@ -52,14 +59,14 @@ export default function About() {
           the support you need, from insurance to 24/7 roadside assistance, so
           you can rent with confidence.
         </p>
-      </section>
+      </Section>
 
       {/* Why Choose Us? Section */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-semibold text-primary mb-4">
-          Why Choose Us?
-        </h2>
-        <ul className="list-inside list-disc space-y-3 text-lg text-primary-content">
+      <Section title="Why Choose Us?">
+        <ul
+          className="list-inside list-disc space-y-3 text-lg text-primary-content"
+          aria-labelledby="why-choose-us"
+        >
           <li>
             <strong className="text-secondary">Affordable & Flexible:</strong>{" "}
             Whether you're renting or listing, we make it easy to find the
@@ -78,24 +85,22 @@ export default function About() {
             platform is designed to help local communities thrive.
           </li>
         </ul>
-      </section>
+      </Section>
 
       {/* Our Values Section */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-semibold text-primary mb-4">Our Values</h2>
-        <p className="text-lg text-primary-content">
+      <Section title="Our Values">
+        <p>
           At GoVan, we believe in making connections that benefit everyone. We
           aim to reduce waste, support local economies, and provide an
           eco-friendly alternative to traditional car rentals. When you choose
           us, you're choosing convenience, trust, and a chance to make a
           positive impact on the world around you.
         </p>
-      </section>
+      </Section>
 
       {/* Join Us Section */}
-      <section className="text-center mb-8">
-        <h2 className="text-3xl font-semibold text-primary mb-4">Join Us</h2>
-        <p className="text-lg text-primary-content">
+      <Section title="Join Us">
+        <p>
           Whether you’re looking for a van to rent or you’re ready to rent out
           your own, we’re here to make it happen. GoVan is more than just a
           marketplace—it’s a community of people helping each other out, one van
@@ -104,10 +109,11 @@ export default function About() {
         <Link
           to="/login"
           className="btn btn-success mt-6 px-6 py-2 text-lg font-semibold"
+          aria-label="Get started by logging in to GoVan"
         >
           Get Started
         </Link>
-      </section>
-    </div>
+      </Section>
+    </main>
   )
 }

@@ -3,10 +3,18 @@ import { Link } from "react-router"
 
 export default function Header() {
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <nav className="navbar bg-base-100 shadow-sm">
+      {/* Navbar start section */}
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
+          {/* Button to open the menu */}
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost md:hidden"
+            aria-label="Open menu"
+            aria-expanded="false" // This should dynamically change based on dropdown state
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -22,43 +30,67 @@ export default function Header() {
               />
             </svg>
           </div>
+
+          {/* Dropdown menu items */}
           <ul
-            tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            role="menu" // Added for clarity
           >
             <li>
-              <Link to="host">Host</Link>
+              <Link to="host" aria-label="Go to Host page">
+                Host
+              </Link>
             </li>
             <li>
-              <Link to="about">About</Link>
+              <Link to="about" aria-label="Go to About page">
+                About
+              </Link>
             </li>
             <li>
-              <Link to="vans">Vans</Link>
+              <Link to="vans" aria-label="Go to Vans page">
+                Vans
+              </Link>
             </li>
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl">
+
+        {/* Logo Link */}
+        <Link
+          to="/"
+          className="btn btn-ghost text-xl"
+          aria-label="Go to homepage"
+        >
           GoVan
         </Link>
       </div>
+
+      {/* Centered menu for larger screens */}
       <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="host">Host</Link>
+            <Link to="host" aria-label="Go to Host page">
+              Host
+            </Link>
           </li>
           <li>
-            <Link to="about">About</Link>
+            <Link to="about" aria-label="Go to About page">
+              About
+            </Link>
           </li>
           <li>
-            <Link to="vans">Vans</Link>
+            <Link to="vans" aria-label="Go to Vans page">
+              Vans
+            </Link>
           </li>
         </ul>
       </div>
+
+      {/* Navbar end section (Login avatar icon) */}
       <div className="navbar-end">
-        <Link to="login" className="btn">
+        <Link to="login" className="btn" aria-label="Go to Login page">
           <RxAvatar />
         </Link>
       </div>
-    </div>
+    </nav>
   )
 }

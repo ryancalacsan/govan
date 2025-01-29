@@ -15,6 +15,7 @@ export default function Login() {
   const location = useLocation()
   const navigate = useNavigate()
 
+  // Redirect user after successful login or to a fallback path
   const from = location.state?.from || "/host"
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -22,15 +23,15 @@ export default function Login() {
     setStatus("submitting")
     loginUser(loginFormData)
       .then(() => {
-        setError(null)
+        setError(null) // Clear previous errors
         localStorage.setItem("loggedin", "true")
         navigate(from, { replace: true })
       })
       .catch((err: Error) => {
-        setError(err)
+        setError(err) // Set error state if login fails
       })
       .finally(() => {
-        setStatus("idle")
+        setStatus("idle") // Reset status after submission
       })
   }
 
@@ -44,6 +45,7 @@ export default function Login() {
 
   return (
     <div className="login-container flex flex-col items-center gap-6">
+      {/* Display message passed in location state */}
       {location.state?.message && (
         <div role="alert" className="alert alert-error w-80">
           <svg
@@ -62,40 +64,60 @@ export default function Login() {
           <span>{location.state.message}</span>
         </div>
       )}
-      {error?.message && <h3 className="login-error">{error.message}</h3>}
+      {/* Display error message if exists */}
+      {error?.message && (
+        <h3 className="login-error" role="alert" aria-live="assertive">
+          {error.message}
+        </h3>
+      )}
       <h1 className="font-bold text-2xl mt-4">Host Login</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
           <legend className="fieldset-legend">Sign in to your account</legend>
 
-          <label className="fieldset-label">Email</label>
+          {/* Email Input */}
+          <label className="fieldset-label" htmlFor="email">
+            Email
+          </label>
           <input
+            id="email"
             name="email"
             type="email"
             onChange={handleChange}
             className="input"
             placeholder="Email"
             value={loginFormData.email}
+            aria-required="true"
           />
 
-          <label className="fieldset-label">Password</label>
+          {/* Password Input */}
+          <label className="fieldset-label" htmlFor="password">
+            Password
+          </label>
           <input
+            id="password"
             name="password"
             type="password"
             onChange={handleChange}
             className="input"
             placeholder="Password"
             value={loginFormData.password}
+            aria-required="true"
           />
 
+          {/* Submit Button */}
           <button
+            type="submit"
             disabled={status === "submitting"}
             className="btn btn-neutral mt-4"
+            aria-disabled={status === "submitting"}
           >
             {status === "submitting" ? "Logging in..." : "Log in"}
           </button>
         </fieldset>
       </form>
+
+      {/* Demo Credentials */}
       <div className="text-center">
         <p className="text-info">Demo Host Account</p>
         <p>email: guest@host.com</p>

@@ -21,11 +21,9 @@ export default function VanDetail() {
           setVan(data)
         }
       } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err)
-        } else {
-          setError(new Error("An unknown error occurred."))
-        }
+        setError(
+          err instanceof Error ? err : new Error("An unknown error occurred.")
+        )
       } finally {
         setLoading(false)
       }
@@ -40,7 +38,13 @@ export default function VanDetail() {
         aria-live="polite"
       >
         <p className="text-lg">Loading Van Detail...</p>
-        <span className="loading loading-dots loading-xl"></span>
+        <span
+          className="loading loading-dots loading-xl"
+          role="status"
+          aria-live="polite"
+        >
+          Loading...
+        </span>
       </div>
     )
   }
@@ -48,13 +52,13 @@ export default function VanDetail() {
   if (error) {
     return (
       <h1 className="text-warning text-xl" aria-live="assertive">
-        Oops, that van doesnt exist. Let's look for another!
+        There was an error while fetching the van details. Please try again
+        later.
       </h1>
     )
   }
 
-  const search = location.state?.search || ""
-  const type = location.state?.type || "all"
+  const { search = "", type = "all" } = location.state || {}
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -67,12 +71,12 @@ export default function VanDetail() {
         &larr; <span className="ml-2">Back to {type} vans</span>
       </Link>
 
-      {van && (
+      {van ? (
         <div className="flex flex-col lg:flex-row items-start space-y-6 lg:space-x-12 lg:space-y-0">
           <div className="w-full lg:w-1/2 h-96 rounded-lg overflow-hidden shadow-lg">
             <img
               src={van.imageUrl}
-              alt={`Image of ${van.name} van`} // More descriptive alt text
+              alt={`Image of ${van.name} van`}
               className="object-cover w-full h-full"
             />
           </div>
@@ -98,11 +102,14 @@ export default function VanDetail() {
             <button
               type="button"
               className="btn btn-accent mt-6 text-accent-content"
+              aria-label="Rent this van"
             >
               Rent this van
             </button>
           </div>
         </div>
+      ) : (
+        <p>No van details available.</p>
       )}
     </div>
   )

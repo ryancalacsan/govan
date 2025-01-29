@@ -5,11 +5,21 @@ import Footer from "./Footer"
 export default function Layout() {
   return (
     <div className="flex flex-col h-screen">
-      <Header />
-      <main className="flex flex-col grow">
+      <header role="banner">
+        <Header />
+      </header>
+
+      <main
+        className="flex flex-col grow"
+        role="main"
+        aria-label="Main content"
+      >
         <Outlet />
       </main>
-      <Footer />
+
+      <footer role="contentinfo">
+        <Footer />
+      </footer>
     </div>
   )
 }

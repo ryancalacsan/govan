@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js"
+import { TooltipItem } from "chart.js"
 
 ChartJS.register(
   CategoryScale,
@@ -34,7 +35,45 @@ interface LineChartProps {
 }
 
 export const LineChart = ({ userData }: LineChartProps) => {
-  const options = {}
+  const options = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: "Income Over Time",
+        font: {
+          size: 20,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (tooltipItem: TooltipItem<"line">) => {
+            const value = tooltipItem.raw as number
+            return `$${value.toLocaleString()}`
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Month",
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Income ($)",
+        },
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1000,
+        },
+      },
+    },
+  }
+
   const data = {
     labels: ["Jan", "Feb", "March", "April", "May", "June"],
     datasets: [
@@ -48,6 +87,7 @@ export const LineChart = ({ userData }: LineChartProps) => {
       },
     ],
   }
+
   return <Line options={options} data={data} />
 }
 

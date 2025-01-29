@@ -2,7 +2,8 @@ import { NavLink, Outlet, useNavigate } from "react-router"
 
 export default function HostLayout() {
   const navigate = useNavigate()
-  function fakeLogOut() {
+
+  function handleLogout() {
     localStorage.removeItem("loggedin")
     navigate("/login")
   }
@@ -11,6 +12,7 @@ export default function HostLayout() {
     <div>
       <div
         role="alert"
+        aria-live="polite"
         className="alert alert-vertical sm:alert-horizontal mb-4"
       >
         <svg
@@ -18,6 +20,7 @@ export default function HostLayout() {
           fill="none"
           viewBox="0 0 24 24"
           className="stroke-info h-6 w-6 shrink-0"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -28,11 +31,17 @@ export default function HostLayout() {
         </svg>
         <span>Logged in as Guest</span>
         <div>
-          <button onClick={fakeLogOut} className="btn btn-sm">
+          <button
+            onClick={handleLogout}
+            className="btn btn-sm"
+            aria-label="Log out from Guest account"
+          >
             Log out
           </button>
         </div>
       </div>
+
+      {/* Navigation Links */}
       <nav className="flex justify-between items-center">
         <ul className="menu menu-horizontal bg-base-200 flex justify-center mx-auto">
           <li>
@@ -40,6 +49,7 @@ export default function HostLayout() {
               to="."
               end
               className={({ isActive }) => (isActive ? "menu-active" : "")}
+              aria-label="Go to Dashboard"
             >
               Dashboard
             </NavLink>
@@ -48,6 +58,7 @@ export default function HostLayout() {
             <NavLink
               to="income"
               className={({ isActive }) => (isActive ? "menu-active" : "")}
+              aria-label="Go to Income page"
             >
               Income
             </NavLink>
@@ -56,6 +67,7 @@ export default function HostLayout() {
             <NavLink
               to="vans"
               className={({ isActive }) => (isActive ? "menu-active" : "")}
+              aria-label="Go to Vans page"
             >
               Vans
             </NavLink>
@@ -64,15 +76,16 @@ export default function HostLayout() {
             <NavLink
               to="reviews"
               className={({ isActive }) => (isActive ? "menu-active" : "")}
+              aria-label="Go to Reviews page"
             >
-              Reviews{" "}
+              Reviews
             </NavLink>
           </li>
         </ul>
       </nav>
-      <div>
-        <Outlet />
-      </div>
+
+      {/* Outlet */}
+      <Outlet />
     </div>
   )
 }
