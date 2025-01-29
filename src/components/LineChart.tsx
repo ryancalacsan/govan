@@ -1,4 +1,5 @@
 import { Line } from "react-chartjs-2"
+import { memo } from "react"
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -21,11 +22,11 @@ ChartJS.register(
 )
 
 const color = {
-  primary: "#1d4ed8", // Blue
-  secondary: "#9333ea", // Purple
-  accent: "#f59e0b", // Amber
-  neutral: "#374151", // Gray
-  "base-100": "#ffffff", // White
+  primary: "#605dff",
+  secondary: "#f43098",
+  accent: "#00d3bb",
+  neutral: "#605dff",
+  "base-100": "#605dff",
 }
 
 export const LineChart = ({ userData }) => {
@@ -37,11 +38,13 @@ export const LineChart = ({ userData }) => {
         label: "Income",
         data: userData,
         fill: false,
-        backgroundColor: color.primary,
-        borderColor: color.primary,
+        backgroundColor: color.accent,
+        borderColor: color.accent,
         tension: 0.1,
       },
     ],
   }
   return <Line options={options} data={data} />
 }
+
+export const MemoizedLineChart = memo(LineChart)

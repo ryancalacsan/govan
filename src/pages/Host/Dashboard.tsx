@@ -3,6 +3,7 @@ import { Link } from "react-router"
 import { getHostVans } from "../../mirage/api"
 import { Van } from "../../types"
 import { CiStar, CiDollar, CiCalendar } from "react-icons/ci"
+import Alert from "../../components/Alert"
 
 export default function Dashboard() {
   const [vans, setVans] = React.useState([])
@@ -20,7 +21,7 @@ export default function Dashboard() {
     const hostVansEls = vans.map((van) => (
       <div
         key={van.id}
-        className="card card-side bg-base-200 shadow-sm max-w-md p-4 rounded-lg m-2"
+        className="card card-side bg-base-200 shadow-sm max-w-xl p-4 rounded-lg m-2 mx-auto"
       >
         <figure>
           <img
@@ -34,7 +35,7 @@ export default function Dashboard() {
           <p>${van.price} / day</p>
           <div className="card-actions justify-end">
             <Link to={`vans/${van.id}`} className="btn btn-primary">
-              View
+              Details
             </Link>
           </div>
         </div>
@@ -42,7 +43,7 @@ export default function Dashboard() {
     ))
 
     return (
-      <div className="host-vans-list">
+      <div className="host-vans-list flex flex-col w-full">
         <section>{hostVansEls}</section>
       </div>
     )
@@ -63,13 +64,9 @@ export default function Dashboard() {
 
   return (
     <>
-      <section className="host-dashboard-earnings flex justify-between items-center bg-primary p-6">
-        <div className="info ">
-          <h1>Welcome!</h1>
-        </div>
-      </section>
-      <section className="mx-auto">
-        <div className="stats stats-vertical sm:stats-horizontal shadow ">
+      <Alert>Welcome!</Alert>
+      <section className="mx-auto flex justify-center w-full">
+        <div className="stats stats-vertical sm:stats-horizontal grow w-full max-sm:max-w-md">
           <Link to="income">
             <div className="stat">
               <div className="stat-figure text-secondary">
@@ -102,9 +99,9 @@ export default function Dashboard() {
         </div>
       </section>
 
-      <section className="host-dashboard-vans p-6">
+      <section className="host-dashboard-vans p-6 mx-auto w-full flex flex-col justify-center items-center">
         <div className="top">
-          <h2>Your listed vans</h2>
+          <h2 className="font-bold text-xl">Your listed vans</h2>
         </div>
         {loading && !vans ? (
           <h1>Loading...</h1>
@@ -114,7 +111,9 @@ export default function Dashboard() {
         {/*<React.Suspense fallback={<h3>Loading...</h3>}>
                     <Await resolve={loaderData.vans}>{renderVanElements}</Await>
                     </React.Suspense>*/}
-        <Link to="vans">View all</Link>
+        <Link to="vans" className="btn btn-md btn-accent">
+          View all
+        </Link>
       </section>
     </>
   )

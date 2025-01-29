@@ -6,7 +6,7 @@ export default function Header() {
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -30,15 +30,7 @@ export default function Header() {
               <Link to="host">Host</Link>
             </li>
             <li>
-              <a>About</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
+              <Link to="about">About</Link>
             </li>
             <li>
               <Link to="vans">Vans</Link>
@@ -49,23 +41,13 @@ export default function Header() {
           GoVan
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Host</a>
+            <Link to="host">Host</Link>
           </li>
           <li>
-            <details>
-              <summary>About</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
+            <Link to="about">About</Link>
           </li>
           <li>
             <Link to="vans">Vans</Link>

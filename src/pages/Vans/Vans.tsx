@@ -55,7 +55,7 @@ export default function Vans() {
             {van.name}
             <div className="badge badge-secondary">NEW</div>
           </h2>
-          <p>{van.description}</p>
+          <p className="line-clamp-2">{van.description}</p>
           <div className="card-actions justify-end">
             <div className="badge badge-outline">{van.type}</div>
             <div className="badge badge-outline">${van.price} / day</div>
@@ -98,60 +98,72 @@ export default function Vans() {
 
   return (
     <div className="van-list-container flex flex-col">
-      <h1>Explore our van options</h1>
-      <form className="filter">
-        <input
-          onClick={() => handleFilterChange("type", "simple")}
-          className="btn"
-          type="radio"
-          name="van-type"
-          aria-label="Simple"
-        />
-        <input
-          onClick={() => handleFilterChange("type", "luxury")}
-          className="btn"
-          type="radio"
-          name="van-type"
-          aria-label="Luxury"
-        />
-        <input
-          onClick={() => handleFilterChange("type", "rugged")}
-          className="btn"
-          type="radio"
-          name="van-type"
-          aria-label="Rugged"
-        />
-        <input
-          onClick={() => handleFilterChange("type", null)}
-          className="btn btn-square"
-          type="reset"
-          value="×"
-        />
-      </form>
-
-      <div className="w-full max-w-xs">
-        <input
-          onChange={handlePriceChange}
-          type="range"
-          min="60"
-          max="120"
-          step={20}
-          className="range"
-          value={maxPrice}
-        />
-        <div className="flex justify-between px-2.5 mt-2 text-xs">
-          <span>|</span>
-          <span>|</span>
-          <span>|</span>
-          <span>|</span>
-        </div>
-        <div className="flex justify-between px-2.5 mt-2 text-xs">
-          <span>60</span>
-          <span>80</span>
-          <span>100</span>
-          <span>120</span>
+      <h1 className="text-4xl font-bold text-primary mx-auto">
+        Explore our van options
+      </h1>
+      <div className="flex flex-col items-center">
+        <div className="flex flex-col w-full items-center gap-4">
+          {/* Type Filter */}
+          <form className="filter">
+            <input
+              onClick={() => handleFilterChange("type", "simple")}
+              className="btn"
+              type="radio"
+              name="van-type"
+              aria-label="Simple"
+            />
+            <input
+              onClick={() => handleFilterChange("type", "luxury")}
+              className="btn"
+              type="radio"
+              name="van-type"
+              aria-label="Luxury"
+            />
+            <input
+              onClick={() => handleFilterChange("type", "rugged")}
+              className="btn"
+              type="radio"
+              name="van-type"
+              aria-label="Rugged"
+            />
+            <input
+              onClick={() => handleFilterChange("type", null)}
+              className="btn btn-square"
+              type="reset"
+              value="×"
+            />
+          </form>
+          {/* Price Filter */}
+          <div className="w-full max-w-xs">
+            <label htmlFor="maxPriceInput" className="">
+              Max Price
+            </label>
+            <input
+              id="maxPriceInput"
+              onChange={handlePriceChange}
+              type="range"
+              min="60"
+              max="120"
+              step={20}
+              className="range"
+              value={maxPrice}
+            />
+            <div className="flex justify-between px-2.5 mt-2 text-xs">
+              <span>|</span>
+              <span>|</span>
+              <span>|</span>
+              <span>|</span>
+            </div>
+            <div className="flex justify-between px-2.5 mt-2 text-xs">
+              <span>60</span>
+              <span>80</span>
+              <span>100</span>
+              <span>120</span>
+            </div>
+          </div>
         </div>
       </div>
+      {/* Van Elements */}
       <div className="van-list flex flex-wrap gap-8 mt-10 justify-items-center">
         {vanElements}
       </div>

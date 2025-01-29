@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router"
 export default function HostLayout() {
   return (
     <>
-      <nav>
+      <nav className="flex justify-center">
         <ul className="menu menu-horizontal bg-base-200">
           <li>
             <NavLink

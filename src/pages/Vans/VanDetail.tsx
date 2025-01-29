@@ -31,41 +31,64 @@ export default function VanDetail() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center mx-auto">
-        <p>Loading Van Detail</p>
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <p className="text-lg">Loading Van Detail...</p>
         <span className="loading loading-dots loading-xl"></span>
       </div>
     )
   }
 
   if (error) {
-    return <h1>There was an error: {error.message}</h1>
+    return <h1 className="text-red-500 text-xl">There was an error: {error}</h1>
   }
 
   const search = location.state?.search || ""
   const type = location.state?.type || "all"
 
   return (
-    <div className="van-detail-container">
-      <Link to={`..${search}`} relative="path" className="back-button">
-        &larr; <span>Back to {type} vans</span>
+    <div className="container mx-auto px-4 py-8">
+      <Link
+        to={`..${search}`}
+        relative="path"
+        className="text-blue-500 font-semibold hover:text-blue-700 flex items-center mb-8"
+      >
+        &larr; <span className="ml-2">Back to {type} vans</span>
       </Link>
 
       {van && (
-        <div className="van-detail flex flex-col">
-          <img
-            src={van.imageUrl}
-            className="h-96 object-cover object-[50%_75%]"
-          />
-          <div>
-            <i className={`van-type ${van.type} selected`}>{van.type}</i>
-            <h2>{van.name}</h2>
-            <div className="card-actions justify-end">
-              <div className="badge badge-outline">{van.type}</div>
-              <div className="badge badge-outline">${van.price} / day</div>
+        <div className="flex flex-col lg:flex-row items-start space-y-6 lg:space-x-12 lg:space-y-0">
+          {/* Van Image Section */}
+          <div className="w-full lg:w-1/2 h-96 rounded-lg overflow-hidden shadow-lg">
+            <img
+              src={van.imageUrl}
+              alt={van.name}
+              className="object-cover w-full h-full"
+            />
+          </div>
+
+          {/* Van Details Section */}
+          <div className="flex flex-col space-y-4 w-full lg:w-1/2">
+            <div className="flex items-center space-x-4">
+              <i className={`badge badge-${van.type} text-lg`}>{van.type}</i>
+              <h2 className="text-3xl font-semibold text-gray-900">
+                {van.name}
+              </h2>
             </div>
-            <p>{van.description}</p>
-            <button className="link-button">Rent this van</button>
+
+            <div className="flex items-center justify-between mt-2">
+              <span className="text-xl font-bold text-green-600">
+                ${van.price} / day
+              </span>
+              <div className="flex space-x-2">
+                <span className="badge badge-outline">{van.type}</span>
+                <span className="badge badge-outline">${van.price} / day</span>
+              </div>
+            </div>
+
+            <p className="text-gray-700 text-lg mt-4">{van.description}</p>
+
+            {/* Rent Button */}
+            <button className="btn btn-primary mt-6">Rent this van</button>
           </div>
         </div>
       )}
