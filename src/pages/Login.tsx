@@ -1,8 +1,8 @@
 import React from "react"
 import { useLocation, useNavigate } from "react-router"
-import { loginUser } from "../database/api"
+import { loginUser } from "../lib/api/api"
 // types
-import { LoginFormData } from "../types"
+import { LoginFormData } from "../types/types"
 
 export default function Login() {
   const [loginFormData, setLoginFormData] = React.useState<LoginFormData>({

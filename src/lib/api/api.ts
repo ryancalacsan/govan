@@ -1,4 +1,4 @@
-import { Van, LoginFormData } from "../types"
+import { Van, LoginFormData } from "../../types/types"
 
 // Firebase
 

@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router"
-import { getHostVans } from "../../database/api"
-import { Van } from "../../types"
+import { getHostVans } from "../../lib/api/api"
+import { Van } from "../../types/types"
 
 export default function HostVans() {
   const [vans, setVans] = React.useState<Van[]>([])

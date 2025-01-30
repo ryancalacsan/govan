@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router"
-import { Van } from "../../types"
+import { Van } from "../../types/types"
 
 export default function HostVanInfo() {
   // Use useOutletContext to extract currentVan from the context

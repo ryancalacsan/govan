@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Link, useSearchParams } from "react-router"
-import { getVans } from "../../database/api"
-import { Van } from "../../types"
+import { getVans } from "../../lib/api/api"
+import { Van } from "../../types/types"
 
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams()

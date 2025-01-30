@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router"
-import { Van } from "../../types"
+import { Van } from "../../types/types"
 
 export default function HostVanPricing() {
   const { currentVan } = useOutletContext<{ currentVan: Van }>()
