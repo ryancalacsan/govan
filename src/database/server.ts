@@ -1,5 +1,4 @@
 // MirageJS Server Data
-
 import { createServer, Model, Response } from "miragejs"
 
 createServer({
@@ -433,36 +432,32 @@ createServer({
     // this.timing = 2000  // => mock a 2 second delay in server response
     this.passthrough("https://firestore.googleapis.com/**")
 
-    this.get("/vans", (schema, _) => {
-      // return new Response(400, {}, {error: "Error fetching data"})
+    this.get("/vans", (schema: any) => {
       return schema.vans.all()
     })
 
-    this.get("/vans/:id", (schema, _) => {
+    this.get("/vans/:id", (schema: any, request) => {
       const id = request.params.id
       return schema.vans.find(id)
     })
 
-    this.get("/host/vans", (schema, _) => {
-      // Hard-code the hostId for now
+    this.get("/host/vans", (schema: any) => {
       return schema.vans.where({ hostId: "123" })
     })
 
-    this.get("/host/vans/:id", (schema, request) => {
-      // Hard-code the hostId for now
+    this.get("/host/vans/:id", (schema: any, request) => {
       const id = request.params.id
       return schema.vans.findBy({ id, hostId: "123" })
     })
 
-    this.get("/host/income", (schema, _) => {
-      // Hard-code the hostId for now
+    this.get("/host/income", (schema: any) => {
       return schema.users.findBy({ id: "123" })
     })
 
-    this.post("/login", (schema, request) => {
+    this.post("/login", (schema: any, request) => {
       const { email, password } = JSON.parse(request.requestBody)
-      //   pretend authentication
       const foundUser = schema.users.findBy({ email, password })
+
       if (!foundUser) {
         return new Response(
           401,
