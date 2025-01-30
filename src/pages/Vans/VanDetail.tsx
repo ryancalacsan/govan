@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, useParams, useLocation } from "react-router"
-import { getVans } from "../../mirage/api"
+import { getVan } from "../../database/api"
 import { Van } from "../../types"
 
 export default function VanDetail() {
@@ -12,9 +12,14 @@ export default function VanDetail() {
 
   React.useEffect(() => {
     async function loadVans() {
+      if (!id) {
+        setError(new Error("Van ID is required"))
+        setLoading(false)
+        return
+      }
       setLoading(true)
       try {
-        const data = await getVans(id)
+        const data = await getVan(id)
         if (Array.isArray(data)) {
           setVan(data[0] || null)
         } else {

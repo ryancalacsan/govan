@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { Link, useSearchParams } from "react-router"
-import { getVans } from "../../mirage/api"
+import { getVans } from "../../database/api"
 import { Van } from "../../types"
 
 export default function Vans() {

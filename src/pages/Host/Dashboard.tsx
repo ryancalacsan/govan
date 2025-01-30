@@ -1,12 +1,12 @@
 import React from "react"
 import { Link } from "react-router"
-import { getHostVans } from "../../mirage/api"
+import { getHostVans } from "../../database/api"
 import { Van } from "../../types"
 import { CiStar, CiDollar, CiCalendar } from "react-icons/ci"
 import Alert from "../../components/Alert"
 
 export default function Dashboard() {
-  const [vans, setVans] = React.useState([])
+  const [vans, setVans] = React.useState<Van[]>([])
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<Error | null>(null)
   React.useEffect(() => {

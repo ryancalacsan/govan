@@ -1,6 +1,6 @@
 import React from "react"
 import { useLocation, useNavigate } from "react-router"
-import { loginUser } from "../mirage/api"
+import { loginUser } from "../database/api"
 // types
 import { LoginFormData } from "../types"
 

@@ -1,3 +1,5 @@
+// MirageJS Server Data
+
 import { createServer, Model, Response } from "miragejs"
 
 createServer({
@@ -429,18 +431,19 @@ createServer({
     this.namespace = "api"
     this.logging = false
     // this.timing = 2000  // => mock a 2 second delay in server response
+    this.passthrough("https://firestore.googleapis.com/**")
 
-    this.get("/vans", (schema, request) => {
+    this.get("/vans", (schema, _) => {
       // return new Response(400, {}, {error: "Error fetching data"})
       return schema.vans.all()
     })
 
-    this.get("/vans/:id", (schema, request) => {
+    this.get("/vans/:id", (schema, _) => {
       const id = request.params.id
       return schema.vans.find(id)
     })
 
-    this.get("/host/vans", (schema, request) => {
+    this.get("/host/vans", (schema, _) => {
       // Hard-code the hostId for now
       return schema.vans.where({ hostId: "123" })
     })
@@ -451,7 +454,7 @@ createServer({
       return schema.vans.findBy({ id, hostId: "123" })
     })
 
-    this.get("/host/income", (schema, request) => {
+    this.get("/host/income", (schema, _) => {
       // Hard-code the hostId for now
       return schema.users.findBy({ id: "123" })
     })

@@ -1,5 +1,5 @@
 import { LineChart } from "../../components/LineChart"
-import { getHostIncome } from "../../mirage/api"
+import { getHostIncome } from "../../database/api"
 import { useEffect, useState } from "react"
 
 export default function Income() {

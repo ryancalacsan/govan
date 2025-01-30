@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router"
-import { getHostVans } from "../../mirage/api"
+import { getHostVans } from "../../database/api"
 import { Van } from "../../types"
 
 export default function HostVans() {

@@ -20,7 +20,7 @@ import AuthRequired from "./components/AuthRequired"
 import NotFound from "./pages/NotFound"
 
 import "./index.css"
-import "./mirage/server"
+import "./database/server"
 
 function App() {
   return (

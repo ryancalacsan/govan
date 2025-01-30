@@ -1,6 +1,6 @@
 import React from "react"
-import { useParams, Link, NavLink, Outlet } from "react-router" // useRouter -> useParams in react-router-dom
-import { getHostVans } from "../../mirage/api"
+import { useParams, Link, NavLink, Outlet } from "react-router"
+import { getVan } from "../../database/api"
 import { Van } from "../../types"
 
 export default function HostVanDetail() {
@@ -8,13 +8,19 @@ export default function HostVanDetail() {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<Error | null>(null)
 
-  const { id } = useParams()
+  const { id } = useParams<{ id: string | undefined }>()
 
   React.useEffect(() => {
-    async function loadVans() {
+    async function loadVan() {
+      if (!id) {
+        setError(new Error("Van ID is required"))
+        setLoading(false)
+        return
+      }
+
       setLoading(true)
       try {
-        const data = await getHostVans(id)
+        const data = await getVan(id)
         setCurrentVan(data)
       } catch (err: unknown) {
         if (err instanceof Error) {
@@ -26,7 +32,7 @@ export default function HostVanDetail() {
         setLoading(false)
       }
     }
-    loadVans()
+    loadVan()
   }, [id])
 
   if (loading) {
