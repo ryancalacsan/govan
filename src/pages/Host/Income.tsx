@@ -44,10 +44,19 @@ export default function Income() {
     )
   }
 
+  // If hostIncome is null, handle gracefully (e.g., return early)
+  if (!hostIncome) {
+    return <p>Error: No income data available.</p>
+  }
+
+  // Safe to access hostIncome here, as it's no longer null
+  const totalIncome = hostIncome.reduce((acc, val) => acc + val, 0)
+  const averageIncome = totalIncome / hostIncome.length
+
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-4">Your Income Over Time</h1>
-      {hostIncome && hostIncome.length > 0 ? (
+      {hostIncome.length > 0 ? (
         <LineChart
           userData={hostIncome}
           aria-label="Income chart displaying income over time"
@@ -55,6 +64,17 @@ export default function Income() {
       ) : (
         <p>No income data available for this period.</p>
       )}
+
+      <div className="my-4">
+        <p className="text-lg font-semibold">
+          Total Income:{" "}
+          <span className="font-bold">${totalIncome.toLocaleString()}</span>
+        </p>
+        <p className="mt-2 text-lg">
+          Average Monthly Income:{" "}
+          <span className="font-bold">${averageIncome.toLocaleString()}</span>
+        </p>
+      </div>
     </div>
   )
 }

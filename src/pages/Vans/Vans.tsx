@@ -12,7 +12,7 @@ export default function Vans() {
 
   const typeFilter = searchParams.get("type")
 
-  const PRICE_RANGES = [50, 100, 150, 200]
+  const PRICE_RANGES = [100, 150, 200]
 
   React.useEffect(() => {
     async function loadVans() {
@@ -150,17 +150,17 @@ export default function Vans() {
               id="maxPriceInput"
               onChange={handlePriceChange}
               type="range"
-              min={50}
+              min={100}
               max={200}
+              step={5}
               className="range"
               value={maxPrice}
               aria-valuenow={maxPrice}
-              aria-valuemin={50}
+              aria-valuemin={100}
               aria-valuemax={200}
               aria-label="Select maximum price range"
             />
             <div className="flex justify-between px-2.5 mt-2 text-xs">
-              <span>|</span>
               <span>|</span>
               <span>|</span>
               <span>|</span>

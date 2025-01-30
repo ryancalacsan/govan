@@ -73,7 +73,7 @@ export default function Login() {
       <h1 className="font-bold text-2xl mt-4">Host Login</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
-          <legend className="fieldset-legend">Sign in to your account</legend>
+          <legend className="fieldset-legend ">Sign in to your account</legend>
 
           {/* Email Input */}
           <label className="fieldset-label" htmlFor="email">

@@ -88,7 +88,13 @@ export default function Header() {
       {/* Navbar end section (Login avatar icon) */}
       <div className="navbar-end">
         <Link to="login" className="btn" aria-label="Go to Login page">
-          <RxAvatar />
+          <div
+            className="tooltip tooltip-left"
+            data-tip="log in"
+            aria-describedby="login-tooltip"
+          >
+            <RxAvatar className="text-xl" />
+          </div>
         </Link>
       </div>
     </nav>
