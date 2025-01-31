@@ -3,7 +3,7 @@ import { Link } from "react-router"
 export default function Home() {
   return (
     <main
-      className="hero grow"
+      className="hero grow bg-bottom"
       style={{
         backgroundImage: "url(hero-van.jpg)",
       }}

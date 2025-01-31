@@ -82,7 +82,7 @@ export default function VanDetail() {
             <img
               src={van.imageUrl}
               alt={`Image of ${van.name} van`}
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full object-[0%_75%]"
             />
           </div>
 

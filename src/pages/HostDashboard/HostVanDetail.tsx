@@ -78,7 +78,7 @@ export default function HostVanDetail() {
             <img
               src={currentVan.imageUrl}
               alt={currentVan.name}
-              className="w-full h-72 object-cover"
+              className="w-full h-72 object-cover object-[0%_75%]"
             />
             <div className="p-6">
               <div className="badge badge-outline">{currentVan.type}</div>
