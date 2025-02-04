@@ -18,9 +18,14 @@ import HostVanPhotos from "./pages/HostDashboard/HostVanPhotos"
 import Login from "./pages/Login"
 import AuthRequired from "./auth/AuthRequired"
 import NotFound from "./pages/NotFound"
-
 import "./index.css"
-import "./lib/api/server"
+
+import { makeServer } from "./server"
+
+// use mirage server when env is set to development
+if (import.meta.env.VITE_USE_MIRAGE === "development") {
+  makeServer({ environment: "development" })
+}
 
 function App() {
   return (
