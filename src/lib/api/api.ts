@@ -1,12 +1,12 @@
 import { Van, LoginFormData } from "../../types/types"
+import { db } from "../firebase"
 
 // use mirage when env is set to development
 const useMirage = import.meta.env.VITE_USE_MIRAGE === "development"
 
 // Firebase
-import { initializeApp } from "firebase/app"
+
 import {
-  getFirestore,
   collection,
   doc,
   getDocs,
@@ -14,18 +14,6 @@ import {
   query,
   where,
 } from "firebase/firestore/lite"
-
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-}
-
-const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
 
 const vansCollectionRef = collection(db, "vans")
 

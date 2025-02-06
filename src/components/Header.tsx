@@ -37,17 +37,21 @@ export default function Header() {
             role="menu" // Added for clarity
           >
             <li>
-              <Link to="host" aria-label="Go to Host page">
+              <Link className="text-lg" to="host" aria-label="Go to Host page">
                 Host
               </Link>
             </li>
             <li>
-              <Link to="about" aria-label="Go to About page">
+              <Link
+                className="text-lg"
+                to="about"
+                aria-label="Go to About page"
+              >
                 About
               </Link>
             </li>
             <li>
-              <Link to="vans" aria-label="Go to Vans page">
+              <Link className="text-lg" to="vans" aria-label="Go to Vans page">
                 Vans
               </Link>
             </li>

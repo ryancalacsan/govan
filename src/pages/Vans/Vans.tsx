@@ -131,7 +131,7 @@ export default function Vans() {
         Explore our van options
       </h1>
       <button
-        className="btn text-accent w-1/4 mx-auto"
+        className="btn text-accent w-auto mx-auto"
         onClick={() => {
           const modal = document.getElementById(
             "my_modal_1"
