@@ -5,6 +5,7 @@ export interface Van {
   description: string
   imageUrl: string
   type: string
+  seats: number
   new: boolean
   hostId: string
 }
