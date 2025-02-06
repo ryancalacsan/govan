@@ -156,7 +156,6 @@ export default function Vans() {
                 id="priceSort"
                 value={sortOrder || ""}
                 onChange={handleSortChange}
-                defaultValue=""
               >
                 <option value="" disabled={true}>
                   Price Options
@@ -227,7 +226,6 @@ export default function Vans() {
                 id="seatSelect"
                 value={seatFilter || 6}
                 onChange={handleSeatChange}
-                defaultValue=""
               >
                 <option value={6}>6 seats or more</option>
                 <option value={7}>7 seats or more</option>

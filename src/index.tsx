@@ -23,6 +23,7 @@ import "./index.css"
 import { makeServer } from "./server"
 
 // use mirage server when env is set to development
+
 if (import.meta.env.VITE_USE_MIRAGE === "development") {
   makeServer({ environment: "development" })
 }

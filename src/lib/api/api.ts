@@ -93,22 +93,39 @@ export async function getHostVans(): Promise<Van[]> {
 }
 
 export async function loginUser(creds: LoginFormData) {
-  console.log("logging in")
-  const res = await fetch("/api/login", {
-    method: "post",
-    body: JSON.stringify(creds),
-  })
-  const data = await res.json()
+  if (useMirage) {
+    console.log("logging in")
+    const res = await fetch("/api/login", {
+      method: "post",
+      body: JSON.stringify(creds),
+    })
+    const data = await res.json()
 
-  if (!res.ok) {
-    throw {
-      message: data.message,
-      statusText: res.statusText,
-      status: res.status,
+    if (!res.ok) {
+      throw {
+        message: data.message,
+        statusText: res.statusText,
+        status: res.status,
+      }
+    }
+
+    return data
+  } else {
+    const { email, password } = creds
+    {
+      const docRef = doc(db, "users", "123")
+      const snapshot = await getDoc(docRef)
+
+      if (!snapshot.exists()) {
+        throw new Error("User not found")
+      }
+      const foundUser = snapshot.data()
+      if (foundUser.email !== email || foundUser.password !== password) {
+        throw new Error("No user with those credentials found!")
+      }
+      return snapshot.data()
     }
   }
-
-  return data
 }
 
 export async function getHostIncome() {

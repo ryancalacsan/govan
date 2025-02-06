@@ -66,7 +66,11 @@ export default function Login() {
       )}
       {/* Display error message if exists */}
       {error?.message && (
-        <h3 className="login-error" role="alert" aria-live="assertive">
+        <h3
+          className="login-error text-error"
+          role="alert"
+          aria-live="assertive"
+        >
           {error.message}
         </h3>
       )}
