@@ -3,7 +3,6 @@ import { Link } from "react-router"
 import { getHostVans } from "../../lib/api/api"
 import { Van } from "../../types/types"
 import { CiStar, CiDollar, CiCalendar } from "react-icons/ci"
-import Alert from "../../components/Alert"
 
 export default function Dashboard() {
   const [vans, setVans] = React.useState<Van[]>([])
