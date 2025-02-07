@@ -1,13 +1,6 @@
-import { NavLink, Outlet, useNavigate } from "react-router"
+import { NavLink, Outlet } from "react-router"
 
 export default function HostLayout() {
-  const navigate = useNavigate()
-
-  function handleLogout() {
-    localStorage.removeItem("loggedin")
-    navigate("/login")
-  }
-
   return (
     <div>
       <div
@@ -30,15 +23,6 @@ export default function HostLayout() {
           ></path>
         </svg>
         <span>Logged in as Guest</span>
-        <div>
-          <button
-            onClick={handleLogout}
-            className="btn btn-sm"
-            aria-label="Log out from Guest account"
-          >
-            Log out
-          </button>
-        </div>
       </div>
 
       {/* Navigation Links */}

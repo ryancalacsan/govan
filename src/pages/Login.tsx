@@ -1,46 +1,27 @@
-import React from "react"
+import { useState } from "react"
 import { useLocation, useNavigate } from "react-router"
-import { loginUser } from "../lib/api/api"
-// types
-import { LoginFormData } from "../types/types"
+import { useAuth } from "../context/AuthContext"
 
 export default function Login() {
-  const [loginFormData, setLoginFormData] = React.useState<LoginFormData>({
-    email: "",
-    password: "",
-  })
-  const [status, setStatus] = React.useState<"idle" | "submitting">("idle")
-  const [error, setError] = React.useState<Error | null>(null)
-
-  const location = useLocation()
+  const { login, loading, error } = useAuth()
+  const [email, setEmail] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
   const navigate = useNavigate()
+  const location = useLocation()
 
-  // Redirect user after successful login or to a fallback path
-  const from = location.state?.from || "/host"
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setStatus("submitting")
-    loginUser(loginFormData)
-      .then(() => {
-        setError(null) // Clear previous errors
-        localStorage.setItem("loggedin", "true")
-        navigate(from, { replace: true })
-      })
-      .catch((err: Error) => {
-        setError(err) // Set error state if login fails
-      })
-      .finally(() => {
-        setStatus("idle") // Reset status after submission
-      })
+    try {
+      await login(email, password)
+      navigate("/host")
+    } catch (err: any) {
+      console.error(err)
+    }
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = e.target
-    setLoginFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
+  const handleDemoLogin = () => {
+    setEmail("guest@host.com")
+    setPassword("p12345")
   }
 
   return (
@@ -65,20 +46,19 @@ export default function Login() {
         </div>
       )}
       {/* Display error message if exists */}
-      {error?.message && (
+      {error && (
         <h3
           className="login-error text-error"
           role="alert"
           aria-live="assertive"
         >
-          {error.message}
+          {error}
         </h3>
       )}
       <h1 className="font-bold text-2xl mt-4">Host Login</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
           <legend className="fieldset-legend ">Sign in to your account</legend>
-
           {/* Email Input */}
           <label className="fieldset-label" htmlFor="email">
             Email
@@ -87,13 +67,13 @@ export default function Login() {
             id="email"
             name="email"
             type="email"
-            onChange={handleChange}
+            onChange={(e) => setEmail(e.target.value)}
             className="input"
             placeholder="Email"
-            value={loginFormData.email}
+            value={email}
             aria-required="true"
+            required
           />
-
           {/* Password Input */}
           <label className="fieldset-label" htmlFor="password">
             Password
@@ -102,31 +82,31 @@ export default function Login() {
             id="password"
             name="password"
             type="password"
-            onChange={handleChange}
+            onChange={(e) => setPassword(e.target.value)}
             className="input"
             placeholder="Password"
-            value={loginFormData.password}
+            value={password}
             aria-required="true"
+            required
           />
-
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={status === "submitting"}
+            disabled={loading}
             className="btn btn-neutral mt-4"
-            aria-disabled={status === "submitting"}
+            aria-disabled={loading}
           >
-            {status === "submitting" ? "Logging in..." : "Log in"}
+            {loading ? "Logging in..." : "Log in"}
+          </button>
+
+          <button
+            onClick={handleDemoLogin}
+            className="text-accent hover:underline"
+          >
+            demo as a guest
           </button>
         </fieldset>
       </form>
-
-      {/* Demo Credentials */}
-      <div className="text-center">
-        <p className="text-info">Demo Host Account</p>
-        <p>email: guest@host.com</p>
-        <p>password: p123</p>
-      </div>
     </div>
   )
 }

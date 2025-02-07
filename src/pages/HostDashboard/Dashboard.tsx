@@ -76,7 +76,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <Alert>Welcome!</Alert>
       <h1 className="text-center text-accent text-xl font-bold mt-2">
         Your Dashbaord
       </h1>

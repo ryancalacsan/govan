@@ -20,6 +20,8 @@ import AuthRequired from "./auth/AuthRequired"
 import NotFound from "./pages/NotFound"
 import "./index.css"
 
+import { AuthProvider } from "./context/AuthContext"
+
 import { makeServer } from "./server"
 
 // use mirage server when env is set to development
@@ -60,6 +62,8 @@ function App() {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </StrictMode>
 )
