@@ -1,7 +1,16 @@
-import { RxAvatar } from "react-icons/rx"
 import { Link } from "react-router"
+import { useAuth } from "../context/AuthContext"
+import { useNavigate } from "react-router"
 
 export default function Header() {
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    navigate("/login")
+    await logout()
+  }
+
   return (
     <nav className="navbar bg-base-100 shadow-sm">
       {/* Navbar start section */}
@@ -91,15 +100,16 @@ export default function Header() {
 
       {/* Navbar end section (Login avatar icon) */}
       <div className="navbar-end">
-        <Link to="login" className="btn" aria-label="Go to Login page">
-          <div
-            className="tooltip tooltip-left"
-            data-tip="log in"
-            aria-describedby="login-tooltip"
-          >
-            <RxAvatar className="text-xl" />
-          </div>
-        </Link>
+        {!user && (
+          <Link to="login" className="btn" aria-label="Go to Login page">
+            Log In
+          </Link>
+        )}
+        {user && (
+          <button className="btn" onClick={handleLogout}>
+            Log Out
+          </button>
+        )}
       </div>
     </nav>
   )
